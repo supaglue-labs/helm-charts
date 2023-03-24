@@ -51,7 +51,7 @@ and we want to make sure that the component is included in the name.
 {{- end -}}
 
 {{- define "supaglue.databasePort" -}}
-{{- default .Values.postgresql.port (include "postgresql.service.port" .Subcharts.postgresql) -}}
+{{- default (include "postgresql.service.port" .Subcharts.postgresql) .Values.postgresql.port -}}
 {{- end -}}
 
 {{- define "supaglue.databaseHost" -}}
@@ -59,11 +59,11 @@ and we want to make sure that the component is included in the name.
 {{- end -}}
 
 {{- define "supaglue.temporalPort" -}}
-{{- template .Values.temporal.port "temporal.frontend.grpcPort" .Subcharts.temporal -}}
+{{- default (include "temporal.frontend.grpcPort" .Subcharts.temporal) .Values.temporal.port  -}}
 {{- end -}}
 
 {{- define "supaglue.temporalHost" -}}
-{{- default .Values.temporal.host (printf "%s-temporal-frontend.%s.svc.cluster.local" .Chart.Name $.Release.Namespace) -}}
+{{- default (printf "%s-temporal-frontend.%s.svc.cluster.local" .Chart.Name $.Release.Namespace) .Values.temporal.host -}}
 {{- end -}}
 
 {{- define "supaglue.databaseUrl" -}}
