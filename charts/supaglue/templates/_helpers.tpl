@@ -39,11 +39,19 @@ and we want to make sure that the component is included in the name.
 {{- end -}}
 
 {{- define "supaglue.databaseName" -}}
-{{- template "postgresql.database" .Subcharts.postgresql -}}
+{{- if .Values.postgresql.enabled -}}
+    {{- template "postgresql.database" .Subcharts.postgresql -}}
+{{- else -}}
+    {{- required "A value for postgresql.auth.database must be set." .Values.postgresql.auth.database -}}
+{{- end -}}
 {{- end -}}
 
 {{- define "supaglue.databaseUsername" -}}
-{{- template "postgresql.username" .Subcharts.postgresql -}}
+{{- if .Values.postgresql.enabled -}}
+    {{- template "postgresql.username" .Subcharts.postgresql -}}
+{{- else -}}
+    {{- required "A value for postgresql.auth.username must be set." .Values.postgresql.auth.username -}}
+{{- end -}}
 {{- end -}}
 
 {{- define "supaglue.databasePassword" -}}
@@ -51,7 +59,11 @@ and we want to make sure that the component is included in the name.
 {{- end -}}
 
 {{- define "supaglue.databasePort" -}}
-{{- default (include "postgresql.service.port" .Subcharts.postgresql) .Values.postgresql.port -}}
+{{- if .Values.postgresql.enabled -}}
+    {{- template "postgresql.service.port" .Subcharts.postgresql -}}
+{{- else -}}
+    {{- required "A value for postgresql.port must be set." .Values.postgresql.port -}}
+{{- end -}}
 {{- end -}}
 
 {{- define "supaglue.databaseHost" -}}
@@ -59,7 +71,11 @@ and we want to make sure that the component is included in the name.
 {{- end -}}
 
 {{- define "supaglue.temporalPort" -}}
-{{- default (include "temporal.frontend.grpcPort" .Subcharts.temporal) .Values.temporal.port  -}}
+{{- if .Values.temporal.enabled -}}
+    {{- template "temporal.frontend.grpcPort" .Subcharts.temporal  -}}
+{{- else -}}
+    {{- required "A value for temporal.port must be set." .Values.temporal.port -}}
+{{- end -}}
 {{- end -}}
 
 {{- define "supaglue.temporalHost" -}}
