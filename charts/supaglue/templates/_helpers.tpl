@@ -46,29 +46,24 @@ and we want to make sure that the component is included in the name.
 {{- template "postgresql.username" .Subcharts.postgresql -}}
 {{- end -}}
 
-# the postgresql chart doesn't have a template to get this easily, so just fetch from the values
 {{- define "supaglue.databasePassword" -}}
-{{- required "A value for global.postgres.auth.password must be set." .Values.global.postgresql.auth.password -}}
+{{- required "A value for global.postgres.auth.password must be set." (default .Values.global.postgresql.auth.password .Values.postgresql.auth.password) -}}
 {{- end -}}
 
-# TODO we should also allow this to be configured in values
 {{- define "supaglue.databasePort" -}}
-{{- template "postgresql.service.port" .Subcharts.postgresql -}}
+{{- default .Values.postgresql.port (include "postgresql.service.port" .Subcharts.postgresql) -}}
 {{- end -}}
 
-# TODO we should also allow this to be configured in values
 {{- define "supaglue.databaseHost" -}}
-{{- printf "%s-postgresql.%s.svc.cluster.local" .Chart.Name $.Release.Namespace -}}
+{{- default .Values.postgresql.host (printf "%s-postgresql.%s.svc.cluster.local" .Chart.Name $.Release.Namespace) -}}
 {{- end -}}
 
-# TODO we should also allow this to be configured in values
 {{- define "supaglue.temporalPort" -}}
-{{- template "temporal.frontend.grpcPort" .Subcharts.temporal -}}
+{{- template .Values.temporal.port "temporal.frontend.grpcPort" .Subcharts.temporal -}}
 {{- end -}}
 
-# TODO we should also allow this to be configured in values
 {{- define "supaglue.temporalHost" -}}
-{{- printf "%s-temporal-frontend.%s.svc.cluster.local" .Chart.Name $.Release.Namespace -}}
+{{- default .Values.temporal.host (printf "%s-temporal-frontend.%s.svc.cluster.local" .Chart.Name $.Release.Namespace) -}}
 {{- end -}}
 
 {{- define "supaglue.databaseUrl" -}}

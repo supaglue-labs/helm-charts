@@ -2,11 +2,12 @@ schema:
   update:
     enabled: true
     backoffLimit: 100
+    env: []
 
 syncWorker:
   enabled: true
   replicaCount: 2
-  logLevel: 'info'
+  logLevel: "info"
   image:
     repository: ~
     tag: ~
@@ -25,7 +26,7 @@ syncWorker:
 management:
   enabled: true
   replicaCount: 1
-  frontendUrl: ''
+  frontendUrl: ""
   image:
     repository: ~
     tag: ~
@@ -47,10 +48,10 @@ management:
 api:
   enabled: true
   replicaCount: 2
-  logLevel: 'info'
-  serverUrl: ''
-  oauthReturnUrl: ''
-  corsOrigin: ''
+  logLevel: "info"
+  serverUrl: ""
+  oauthReturnUrl: ""
+  corsOrigin: ""
   image:
     repository: ~
     tag: ~
@@ -108,13 +109,13 @@ secretKeys:
   internalApiToken: internal-api-token
   adminPassword: admin-password
 
-apiKeySalt: ''
-dbEncryptionSecret: ''
-jwtSecret: ''
-internalApiToken: ''
-adminPassword: ''
+apiKeySalt: ""
+dbEncryptionSecret: ""
+jwtSecret: ""
+internalApiToken: ""
+adminPassword: ""
 
-deploymentId: ''
+deploymentId: ""
 
 temporal:
   enabled: true
