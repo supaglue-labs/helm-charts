@@ -1,3 +1,7 @@
+global:
+  postgresql:
+    auth: {}
+
 schema:
   update:
     enabled: true
