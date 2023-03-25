@@ -123,6 +123,8 @@ deploymentId: ""
 
 temporal:
   enabled: true
+  host: ~
+  port: ~
   grafana:
     enabled: false
   elasticsearch:
@@ -135,6 +137,8 @@ temporal:
 
 postgresql:
   enabled: true
+  host: ~
+  port: ~
   auth:
     database: supaglue
     username: supaglue

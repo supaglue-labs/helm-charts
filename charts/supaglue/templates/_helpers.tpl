@@ -67,7 +67,7 @@ and we want to make sure that the component is included in the name.
 {{- end -}}
 
 {{- define "supaglue.databaseHost" -}}
-{{- default .Values.postgresql.host (printf "%s-postgresql.%s.svc.cluster.local" .Chart.Name $.Release.Namespace) -}}
+{{- default (printf "%s-postgresql.%s.svc.cluster.local" .Chart.Name $.Release.Namespace) .Values.postgresql.host  -}}
 {{- end -}}
 
 {{- define "supaglue.temporalPort" -}}
