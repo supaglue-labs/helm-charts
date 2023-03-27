@@ -85,7 +85,7 @@ and we want to make sure that the component is included in the name.
 {{- define "supaglue.databaseUrl" -}}
 {{- $database := include "supaglue.databaseName" . -}}
 {{- $username := include "supaglue.databaseUsername" . -}}
-{{- $password := include "supaglue.databasePassword" . -}}
+{{- $password := urlquery (include "supaglue.databasePassword" .) -}}
 {{- $host := include "supaglue.databaseHost" . -}}
 {{- $port := include "supaglue.databasePort" . -}}
 {{- printf "postgres://%s:%s@%s:%s/%s" $username $password $host $port $database -}}
