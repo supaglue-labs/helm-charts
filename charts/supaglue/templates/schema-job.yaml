@@ -40,8 +40,8 @@ spec:
           command: ['sh', '-c', 'until nc -z -v -w30 {{ template "supaglue.temporalHost" . }} {{ template "supaglue.temporalPort" $ }}; do echo waiting for temporal; sleep 2; done;']
       containers:
         - name: schema-update
-          image: "{{ default "supaglue/api" .Values.api.image.repository }}:{{ default .Chart.AppVersion .Values.api.image.tag }}"
-          imagePullPolicy: {{ default "IfNotPresent" .Values.api.image.pullPolicy }}
+          image: "{{ default "supaglue/api" .Values.schema.update.image.repository }}:{{ default .Chart.AppVersion .Values.schema.update.image.tag }}"
+          imagePullPolicy: {{ default "IfNotPresent" .Values.schema.update.image.pullPolicy }}
           env:
             - name: SUPAGLUE_DATABASE_URL
               valueFrom:
@@ -63,4 +63,12 @@ spec:
             {{- toYaml . | nindent 12 }}
             {{- end }}
           command: ['sh', '-c', 'npx prisma migrate deploy && node node_modules/@supaglue/db/prisma/seed.js && node init_scripts/init_temporal.js']
+          volumeMounts:
+            {{- if .Values.api.additionalVolumeMounts }}
+            {{- toYaml .Values.schema.update.additionalVolumeMounts | nindent 12}}
+            {{- end }}
+      volumes:
+        {{- if .Values.api.additionalVolumes }}
+        {{- toYaml .Values.schema.update.additionalVolumes | nindent 8}}
+        {{- end }}
 {{ end }}
