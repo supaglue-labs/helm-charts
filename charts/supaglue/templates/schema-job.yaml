@@ -62,7 +62,11 @@ spec:
             {{- with .Values.schema.update.env }}
             {{- toYaml . | nindent 12 }}
             {{- end }}
+          {{- if .Values.cloud }}
+          command: ['sh', '-c', 'npx prisma migrate deploy && node node_modules/@supaglue/db/prisma/seed.js']
+          {{- else }}
           command: ['sh', '-c', 'npx prisma migrate deploy && node node_modules/@supaglue/db/prisma/seed.js && node init_scripts/init_temporal.js']
+          {{- end }}
           volumeMounts:
             {{- if .Values.api.additionalVolumeMounts }}
             {{- toYaml .Values.schema.update.additionalVolumeMounts | nindent 12}}
