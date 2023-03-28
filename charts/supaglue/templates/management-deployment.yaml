@@ -54,6 +54,8 @@ spec:
                 secretKeyRef:
                   name: {{ template "supaglue.secretName" . }}
                   key: {{ .Values.secretKeys.internalApiToken }}
+            - name: FRONTEND_URL
+              value: {{ required "management.frontendUrl is required" .Values.management.frontendUrl }}
             - name: NEXTAUTH_URL
               value: {{ required "management.frontendUrl is required" .Values.management.frontendUrl }}
             - name: SUPAGLUE_DEPLOYMENT_ID
