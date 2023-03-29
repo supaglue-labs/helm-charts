@@ -108,10 +108,9 @@ spec:
             - name: http
               containerPort: {{ .Values.api.service.port }}
               protocol: TCP
-            # TODO uncomment when we are producing metrics
-            # - name: metrics
-            #   containerPort: 9090
-            #   protocol: TCP
+            - name: metrics
+              containerPort: 9090
+              protocol: TCP
           livenessProbe:
               initialDelaySeconds: 30
               httpGet:

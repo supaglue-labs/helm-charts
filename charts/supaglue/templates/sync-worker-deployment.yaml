@@ -89,11 +89,10 @@ spec:
             {{- with .Values.syncWorker.env }}
             {{- toYaml . | nindent 12 }}
             {{- end }}
-          ports: []
-            # TODO uncomment when we are producing metrics
-            # - name: metrics
-            #   containerPort: 9090
-            #   protocol: TCP
+          ports:
+            - name: metrics
+              containerPort: 9090
+              protocol: TCP
           volumeMounts:
             {{- if .Values.syncWorker.additionalVolumeMounts }}
             {{- toYaml .Values.syncWorker.additionalVolumeMounts | nindent 12}}
