@@ -7,6 +7,10 @@ schema:
     enabled: true
     backoffLimit: 100
     env: []
+    image:
+      repository: ~
+      tag: ~
+      pullPolicy: ~
 
 syncWorker:
   enabled: true
