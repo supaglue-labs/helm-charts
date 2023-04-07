@@ -1,4 +1,4 @@
-{{- if .Values.ingress.enabled -}}
+{{- if and .Values.management.enabled .Values.management.ingress.enabled -}}
   {{- if .Capabilities.APIVersions.Has "networking.k8s.io/v1" }}
 apiVersion: networking.k8s.io/v1
   {{- else if .Capabilities.APIVersions.Has "networking.k8s.io/v1beta1" }}
@@ -16,9 +16,9 @@ metadata:
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/version: {{ .Chart.AppVersion | replace "+" "_" }}
     app.kubernetes.io/part-of: {{ .Chart.Name }}
-  {{- if not (empty (coalesce .Values.ingress.annotations .Values.managedCertificate.enabled)) }}
+  {{- if not (empty (coalesce .Values.management.ingress.annotations .Values.managedCertificate.enabled)) }}
   annotations:
-    {{- with .Values.ingress.annotations }}
+    {{- with .Values.management.ingress.annotations }}
     {{- toYaml . | nindent 4 }}
     {{- end }}
     {{- if .Values.managedCertificate.enabled }}
@@ -26,12 +26,12 @@ metadata:
     {{- end }}
     {{- end }}
 spec:
-  {{- with .Values.ingress.className }}
+  {{- with .Values.management.ingress.className }}
   ingressClassName: {{ . | quote }}
   {{- end }}
-  {{- if .Values.ingress.tls }}
+  {{- if .Values.management.ingress.tls }}
   tls:
-    {{- range .Values.ingress.tls }}
+    {{- range .Values.management.ingress.tls }}
     - hosts:
       {{- range .hosts }}
       - {{ . | quote }}
@@ -40,26 +40,7 @@ spec:
       {{- end }}
       {{- end }}
   rules:
-    {{- range .Values.api.ingressHosts }}
-    {{- $url := splitList "/" . }}
-      - host: {{ first $url }}
-        http:
-          paths:
-            - path: /*
-              {{- if $.Capabilities.APIVersions.Has "networking.k8s.io/v1" }}
-              pathType: ImplementationSpecific
-              backend:
-                service:
-                  name: {{ include "supaglue.fullname" $ }}-api
-                  port:
-                    number: {{ $.Values.api.service.port }}
-              {{- else if $.Capabilities.APIVersions.Has "networking.k8s.io/v1beta1" }}
-              backend:
-                serviceName: {{ include "supaglue.fullname" $ }}-api
-                servicePort: {{ $.Values.api.service.port }}
-              {{- end }}
-      {{- end}}
-      {{- range .Values.management.ingressHosts }}
+      {{- range .Values.management.ingress.hosts }}
       {{- $url := splitList "/" . }}
       - host: {{ first $url }}
         http:

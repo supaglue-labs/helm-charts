@@ -46,8 +46,19 @@ management:
   nodeSelector: {}
   tolerations: []
   affinity: {}
-  ingressHosts: []
-  #  - "supaglue.domain.com"
+  ingress:
+    enabled: true
+    # className: nginx
+    annotations:
+      {}
+      # assign to a static IP in GCP
+      # kubernetes.io/ingress.global-static-ip-name: supaglue-ip
+      # assign a Managed Certificate in GCP
+      # networking.gke.io/managed-certificates: supaglue-cert
+    tls: []
+    #  - secretName: chart-example-tls
+    hosts: []
+    #   - "supaglue.domain.com"
 
 api:
   enabled: true
@@ -74,26 +85,23 @@ api:
   nodeSelector: {}
   tolerations: []
   affinity: {}
-  ingressHosts: []
-  #  - "supaglue.domain.com"
+  ingress:
+    enabled: true
+    # className: nginx
+    annotations:
+      {}
+      # assign to a static IP in GCP
+      # kubernetes.io/ingress.global-static-ip-name: supaglue-ip
+      # assign a Managed Certificate in GCP
+      # networking.gke.io/managed-certificates: supaglue-cert
+    tls: []
+    #  - secretName: chart-example-tls
+    hosts: []
+    #   - "supaglue-api.domain.com"
 
 managedCertificate:
   enabled: false
   name: supaglue-api-cert
-
-ingress:
-  enabled: true
-  # className: nginx
-  annotations:
-    {}
-    # assign to a static IP in GCP
-    # kubernetes.io/ingress.global-static-ip-name: supaglue-ip
-    # assign a Managed Certificate in GCP
-    # networking.gke.io/managed-certificates: supaglue-cert
-  tls: []
-  #  - secretName: chart-example-tls
-  #    hosts:
-  #      - chart-example.local
 
 # Custom Service account management
 serviceAccount:
@@ -112,6 +120,8 @@ secretKeys:
   jwtSecret: jwt-secret
   internalApiToken: internal-api-token
   adminPassword: admin-password
+  apiDatabaseUrl: api-database-url
+  syncWorkerDatabaseUrl: sync-worker-database-url
 
 apiKeySalt: ""
 dbEncryptionSecret: ""
@@ -148,3 +158,6 @@ postgresql:
       requests:
         memory: 2Gi
         cpu: 1
+    extendedConfiguration: |
+      max_connections = 400
+      idle_in_transaction_session_timeout = 600000
