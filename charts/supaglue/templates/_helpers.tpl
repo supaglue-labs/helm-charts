@@ -95,14 +95,14 @@ and we want to make sure that the component is included in the name.
 {{- $databaseUrl := include "supaglue.databaseUrl" . -}}
 {{- $connectionLimit := default 5 ((.Values.syncWorker.db).parameters).connectionLimit -}}
 {{- $poolTimeout := default 10 ((.Values.syncWorker.db).parameters).poolTimeout -}}
-{{- printf "%s?connection_limit=%d&pool_timeout=%d" $databaseUrl $connectionLimit $poolTimeout -}}
+{{- print $databaseUrl "?connection_limit=" $connectionLimit "&pool_timeout="  $poolTimeout -}}
 {{- end -}}
 
 {{- define "supaglue.api.databaseUrl" -}}
 {{- $databaseUrl := include "supaglue.databaseUrl" . -}}
 {{- $connectionLimit := default 5 ((.Values.api.db).parameters).connectionLimit -}}
 {{- $poolTimeout := default 10 ((.Values.api.db).parameters).poolTimeout -}}
-{{- printf "%s?connection_limit=%d&pool_timeout=%d" $databaseUrl $connectionLimit $poolTimeout -}}
+{{- print $databaseUrl "?connection_limit=" $connectionLimit "&pool_timeout="  $poolTimeout -}}
 {{- end -}}
 
 {{- define "supaglue.secretName" -}}
