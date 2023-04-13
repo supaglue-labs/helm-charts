@@ -93,16 +93,26 @@ and we want to make sure that the component is included in the name.
 
 {{- define "supaglue.syncWorker.databaseUrl" -}}
 {{- $databaseUrl := include "supaglue.databaseUrl" . -}}
-{{- $connectionLimit := default 5 ((.Values.syncWorker.db).parameters).connectionLimit -}}
-{{- $poolTimeout := default 10 ((.Values.syncWorker.db).parameters).poolTimeout -}}
-{{- print $databaseUrl "?connection_limit=" $connectionLimit "&pool_timeout="  $poolTimeout -}}
+{{- $connectionLimit := default "" ((.Values.syncWorker.db).parameters).connectionLimit -}}
+{{- $poolTimeout := default "" ((.Values.syncWorker.db).parameters).poolTimeout -}}
+{{- $sslCert := default "" ((.values.syncWorker.db).parameters).sslCert -}}
+{{- $sslMode := default "" ((.values.syncWorker.db).parameters).sslMode -}}
+{{- $sslIdentity := default "" ((.values.syncWorker.db).parameters).sslIdentity -}}
+{{- $sslPassword := default "" ((.values.syncWorker.db).parameters).sslPassword -}}
+{{- $sslAccept := default "" ((.values.syncWorker.db).parameters).sslAccept -}}
+{{- print $databaseUrl "?connection_limit=" $connectionLimit "&pool_timeout="  $poolTimeout "&sslcert=" $sslCert "&sslmode=" $sslMode "&sslidentity=" $sslIdentity "&sslpassword=" $sslPassword "&sslaccept=" $sslAccept -}}
 {{- end -}}
 
 {{- define "supaglue.api.databaseUrl" -}}
 {{- $databaseUrl := include "supaglue.databaseUrl" . -}}
-{{- $connectionLimit := default 5 ((.Values.api.db).parameters).connectionLimit -}}
-{{- $poolTimeout := default 10 ((.Values.api.db).parameters).poolTimeout -}}
-{{- print $databaseUrl "?connection_limit=" $connectionLimit "&pool_timeout="  $poolTimeout -}}
+{{- $connectionLimit := default "" ((.Values.api.db).parameters).connectionLimit -}}
+{{- $poolTimeout := default "" ((.Values.api.db).parameters).poolTimeout -}}
+{{- $sslCert := default "" ((.values.api.db).parameters).sslCert -}}
+{{- $sslMode := default "" ((.values.api.db).parameters).sslMode -}}
+{{- $sslIdentity := default "" ((.values.api.db).parameters).sslIdentity -}}
+{{- $sslPassword := default "" ((.values.api.db).parameters).sslPassword -}}
+{{- $sslAccept := default "" ((.values.api.db).parameters).sslAccept -}}
+{{- print $databaseUrl "?connection_limit=" $connectionLimit "&pool_timeout="  $poolTimeout "&sslcert=" $sslCert "&sslmode=" $sslMode "&sslidentity=" $sslIdentity "&sslpassword=" $sslPassword "&sslaccept=" $sslAccept -}}
 {{- end -}}
 
 {{- define "supaglue.secretName" -}}
