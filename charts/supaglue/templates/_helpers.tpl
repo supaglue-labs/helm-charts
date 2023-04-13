@@ -95,11 +95,11 @@ and we want to make sure that the component is included in the name.
 {{- $databaseUrl := include "supaglue.databaseUrl" . -}}
 {{- $connectionLimit := default "" ((.Values.syncWorker.db).parameters).connectionLimit -}}
 {{- $poolTimeout := default "" ((.Values.syncWorker.db).parameters).poolTimeout -}}
-{{- $sslCert := default "" ((.values.syncWorker.db).parameters).sslCert -}}
-{{- $sslMode := default "" ((.values.syncWorker.db).parameters).sslMode -}}
-{{- $sslIdentity := default "" ((.values.syncWorker.db).parameters).sslIdentity -}}
-{{- $sslPassword := default "" ((.values.syncWorker.db).parameters).sslPassword -}}
-{{- $sslAccept := default "" ((.values.syncWorker.db).parameters).sslAccept -}}
+{{- $sslCert := default "" ((.Values.syncWorker.db).parameters).sslCert -}}
+{{- $sslMode := default "" ((.Values.syncWorker.db).parameters).sslMode -}}
+{{- $sslIdentity := default "" ((.Values.syncWorker.db).parameters).sslIdentity -}}
+{{- $sslPassword := default "" ((.Values.syncWorker.db).parameters).sslPassword -}}
+{{- $sslAccept := default "" ((.Values.syncWorker.db).parameters).sslAccept -}}
 {{- print $databaseUrl "?connection_limit=" $connectionLimit "&pool_timeout="  $poolTimeout "&sslcert=" $sslCert "&sslmode=" $sslMode "&sslidentity=" $sslIdentity "&sslpassword=" $sslPassword "&sslaccept=" $sslAccept -}}
 {{- end -}}
 
@@ -107,11 +107,11 @@ and we want to make sure that the component is included in the name.
 {{- $databaseUrl := include "supaglue.databaseUrl" . -}}
 {{- $connectionLimit := default "" ((.Values.api.db).parameters).connectionLimit -}}
 {{- $poolTimeout := default "" ((.Values.api.db).parameters).poolTimeout -}}
-{{- $sslCert := default "" ((.values.api.db).parameters).sslCert -}}
-{{- $sslMode := default "" ((.values.api.db).parameters).sslMode -}}
-{{- $sslIdentity := default "" ((.values.api.db).parameters).sslIdentity -}}
-{{- $sslPassword := default "" ((.values.api.db).parameters).sslPassword -}}
-{{- $sslAccept := default "" ((.values.api.db).parameters).sslAccept -}}
+{{- $sslCert := default "" ((.Values.api.db).parameters).sslCert -}}
+{{- $sslMode := default "" ((.Values.api.db).parameters).sslMode -}}
+{{- $sslIdentity := default "" ((.Values.api.db).parameters).sslIdentity -}}
+{{- $sslPassword := default "" ((.Values.api.db).parameters).sslPassword -}}
+{{- $sslAccept := default "" ((.Values.api.db).parameters).sslAccept -}}
 {{- print $databaseUrl "?connection_limit=" $connectionLimit "&pool_timeout="  $poolTimeout "&sslcert=" $sslCert "&sslmode=" $sslMode "&sslidentity=" $sslIdentity "&sslpassword=" $sslPassword "&sslaccept=" $sslAccept -}}
 {{- end -}}
 
