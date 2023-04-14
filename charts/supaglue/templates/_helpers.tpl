@@ -95,7 +95,7 @@ and we want to make sure that the component is included in the name.
 {{- $databaseUrl := include "supaglue.databaseUrl" . -}}
 {{- $connectionLimit := ((.Values.syncWorker.db).parameters).connectionLimit -}}
 {{- $poolTimeout := ((.Values.syncWorker.db).parameters).poolTimeout -}}
-{{- $sslCert := ternary (nil urlquery ((.Values.syncWorker.db).parameters).sslCert) (empty ((.Values.api.db).parameters).sslCert) -}}
+{{- $sslCert := empty ((.Values.syncWorker.db).parameters).sslCert | ternary nil (urlquery ((.Values.syncWorker.db).parameters).sslCert)  -}}
 {{- $sslMode := ((.Values.syncWorker.db).parameters).sslMode -}}
 {{- $sslIdentity := ((.Values.syncWorker.db).parameters).sslIdentity -}}
 {{- $sslPassword := ((.Values.syncWorker.db).parameters).sslPassword -}}
@@ -118,7 +118,7 @@ and we want to make sure that the component is included in the name.
 {{- $databaseUrl := include "supaglue.databaseUrl" . -}}
 {{- $connectionLimit := ((.Values.api.db).parameters).connectionLimit -}}
 {{- $poolTimeout := ((.Values.api.db).parameters).poolTimeout -}}
-{{- $sslCert := ternary (urlquery ((.Values.api.db).parameters).sslCert) nil ((.Values.api.db).parameters).sslCert -}}
+{{- $sslCert := empty ((.Values.api.db).parameters).sslCert | ternary nil (urlquery ((.Values.syncWorker.db).parameters).sslCert) -}}
 {{- $sslMode := ((.Values.api.db).parameters).sslMode -}}
 {{- $sslIdentity := ((.Values.api.db).parameters).sslIdentity -}}
 {{- $sslPassword := ((.Values.api.db).parameters).sslPassword -}}
