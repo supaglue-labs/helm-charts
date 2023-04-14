@@ -95,7 +95,7 @@ and we want to make sure that the component is included in the name.
 {{- $databaseUrl := include "supaglue.databaseUrl" . -}}
 {{- $connectionLimit := default "" ((.Values.syncWorker.db).parameters).connectionLimit -}}
 {{- $poolTimeout := default "" ((.Values.syncWorker.db).parameters).poolTimeout -}}
-{{- $sslCert := default "" ((.Values.syncWorker.db).parameters).sslCert -}}
+{{- $sslCert := urlquery (default "" ((.Values.syncWorker.db).parameters).sslCert) -}}
 {{- $sslMode := default "" ((.Values.syncWorker.db).parameters).sslMode -}}
 {{- $sslIdentity := default "" ((.Values.syncWorker.db).parameters).sslIdentity -}}
 {{- $sslPassword := default "" ((.Values.syncWorker.db).parameters).sslPassword -}}
@@ -107,7 +107,7 @@ and we want to make sure that the component is included in the name.
 {{- $databaseUrl := include "supaglue.databaseUrl" . -}}
 {{- $connectionLimit := default "" ((.Values.api.db).parameters).connectionLimit -}}
 {{- $poolTimeout := default "" ((.Values.api.db).parameters).poolTimeout -}}
-{{- $sslCert := default "" ((.Values.api.db).parameters).sslCert -}}
+{{- $sslCert := urlquery (default "" ((.Values.api.db).parameters).sslCert) -}}
 {{- $sslMode := default "" ((.Values.api.db).parameters).sslMode -}}
 {{- $sslIdentity := default "" ((.Values.api.db).parameters).sslIdentity -}}
 {{- $sslPassword := default "" ((.Values.api.db).parameters).sslPassword -}}
