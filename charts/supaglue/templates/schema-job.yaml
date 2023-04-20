@@ -8,7 +8,7 @@ metadata:
     helm.sh/chart: {{ include "supaglue.chart" . }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
     app.kubernetes.io/instance: {{ .Release.Name }}
-    app.kubernetes.io/version: {{ .Chart.AppVersion | replace "+" "_" }}
+    app.kubernetes.io/version: {{ default .Chart.AppVersion .Values.schema.update.image.tag | replace "+" "_" }}
     app.kubernetes.io/component: database
     app.kubernetes.io/part-of: {{ .Chart.Name }}
   annotations:
@@ -25,7 +25,7 @@ spec:
         helm.sh/chart: {{ include "supaglue.chart" . }}
         app.kubernetes.io/managed-by: {{ .Release.Service }}
         app.kubernetes.io/instance: {{ .Release.Name }}
-        app.kubernetes.io/version: {{ .Chart.AppVersion | replace "+" "_" }}
+        app.kubernetes.io/version: {{ default .Chart.AppVersion .Values.schema.update.image.tag | replace "+" "_" }}
         app.kubernetes.io/component: database
         app.kubernetes.io/part-of: {{ .Chart.Name }}
     spec:
