@@ -62,8 +62,6 @@ spec:
             {{- end }}
             - name: SUPAGLUE_API_PORT
               value: {{ .Values.api.service.port | quote }}
-            - name: SUPAGLUE_DISABLE_ERROR_REPORTING
-              value: "1"
             - name: DISABLE_BANNER
               value: "1"
             - name: SUPAGLUE_SERVER_URL
