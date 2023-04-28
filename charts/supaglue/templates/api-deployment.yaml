@@ -56,6 +56,10 @@ spec:
           env:
             - name: NODE_ENV
               value: production
+            {{- with .Values.environment }}
+            - name: SUPAGLUE_ENVIRONMENT
+              value: {{ . }}
+            {{- end }}
             - name: SUPAGLUE_API_PORT
               value: {{ .Values.api.service.port | quote }}
             - name: SUPAGLUE_DISABLE_ERROR_REPORTING

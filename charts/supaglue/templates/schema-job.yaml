@@ -50,6 +50,10 @@ spec:
                   key: {{ default "api-database-url" .Values.secretKeys.apiDatabaseUrl }}
             - name: NODE_ENV
               value: production
+            {{- with .Values.environment }}
+            - name: SUPAGLUE_ENVIRONMENT
+              value: {{ . }}
+            {{- end }}
             - name: SUPAGLUE_API_ENCRYPTION_SECRET
               valueFrom:
                 secretKeyRef:
