@@ -2,6 +2,8 @@ global:
   postgresql:
     auth: {}
 
+environment: ~
+
 schema:
   update:
     enabled: true

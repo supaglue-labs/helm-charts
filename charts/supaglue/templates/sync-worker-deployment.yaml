@@ -66,6 +66,10 @@ spec:
           env:
             - name: NODE_ENV
               value: production
+            {{- with .Values.environment }}
+            - name: SUPAGLUE_ENVIRONMENT
+              value: {{ . }}
+            {{- end }}
             - name: DISABLE_BANNER
               value: "1"
             - name: SUPAGLUE_LOG_LEVEL

@@ -42,6 +42,10 @@ spec:
           image: "{{ default "supaglue/mgmt-ui" .Values.management.image.repository }}:{{ default .Chart.AppVersion .Values.management.image.tag }}"
           imagePullPolicy: {{ default "IfNotPresent" .Values.management.image.pullPolicy }}
           env:
+            {{- with .Values.environment }}
+            - name: NEXT_PUBLIC_SUPAGLUE_ENVIRONMENT
+              value: {{ . }}
+            {{- end }}
             - name: SUPAGLUE_API_HOST
               value: {{ .Values.api.serverUrl }}
             - name: SUPAGLUE_JWT_SECRET
