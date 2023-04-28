@@ -3,6 +3,40 @@ entries:
   supaglue:
   - apiVersion: v2
     appVersion: 0.7.11
+    created: "2023-04-28T23:08:46.249064225Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 12.2.2
+    - condition: temporal.enabled
+      name: temporal
+      repository: file://charts/temporal
+      version: 0.20.0
+    - name: common
+      repository: https://charts.bitnami.com/bitnami
+      tags:
+      - bitnami-common
+      version: 2.x.x
+    description: Supaglue
+    digest: dd5a52a8f05ddac6d7573f19fea3edb5aa6c2638492155a3bc6e60cc4acd6bee
+    home: https://supaglue.com/
+    keywords:
+    - integration
+    - crm
+    - api
+    maintainers:
+    - name: Supaglue, Inc.
+      url: https://supaglue.com/
+    name: supaglue
+    sources:
+    - https://github.com/supaglue-labs/supaglue
+    type: application
+    urls:
+    - https://github.com/supaglue-labs/helm-charts/releases/download/supaglue-0.1.18/supaglue-0.1.18.tgz
+    version: 0.1.18
+  - apiVersion: v2
+    appVersion: 0.7.11
     created: "2023-04-28T22:25:47.101268515Z"
     dependencies:
     - condition: postgresql.enabled
@@ -1055,4 +1089,4 @@ entries:
     urls:
     - https://github.com/supaglue-labs/helm-charts/releases/download/supaglue-0.0.5/supaglue-0.0.5.tgz
     version: 0.0.5
-generated: "2023-04-28T22:25:47.101503018Z"
+generated: "2023-04-28T23:08:46.249673934Z"
