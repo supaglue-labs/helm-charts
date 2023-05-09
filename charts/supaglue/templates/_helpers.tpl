@@ -137,6 +137,29 @@ and we want to make sure that the component is included in the name.
 {{- end -}}
 {{- end -}}
 
+{{- define "supaglue.salesforcePubSub.databaseUrl" -}}
+{{- $databaseUrl := include "supaglue.databaseUrl" . -}}
+{{- $connectionLimit := ((.Values.salesforcePubSub.db).parameters).connectionLimit -}}
+{{- $poolTimeout := ((.Values.salesforcePubSub.db).parameters).poolTimeout -}}
+{{- $sslCert := empty ((.Values.salesforcePubSub.db).parameters).sslCert | ternary nil (urlquery ((.Values.syncWorker.db).parameters).sslCert) -}}
+{{- $sslMode := ((.Values.salesforcePubSub.db).parameters).sslMode -}}
+{{- $sslIdentity := ((.Values.salesforcePubSub.db).parameters).sslIdentity -}}
+{{- $sslPassword := ((.Values.salesforcePubSub.db).parameters).sslPassword -}}
+{{- $sslAccept := ((.Values.salesforcePubSub.db).parameters).sslAccept -}}
+{{- $params := dict "connection_limit" $connectionLimit "pool_timeout" $poolTimeout "sslcert" $sslCert "sslmode" $sslMode "sslidentity" $sslIdentity "sslpassword" $sslPassword "sslaccept" $sslAccept -}}
+{{- $lastIndex := sub (len (keys $params)) 1 -}}
+{{- print $databaseUrl "?" -}}
+{{- range $index, $key := keys $params -}}
+  {{- $value := get $params $key -}}
+  {{- if $value -}}
+    {{- print $key "=" $value -}}
+    {{- if ne $index $lastIndex -}}
+      {{- print "&" -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- end -}}
+
 {{- define "supaglue.secretName" -}}
 {{- if .Values.existingSecret -}}
     {{- printf "%s" (tpl .Values.existingSecret $) -}}

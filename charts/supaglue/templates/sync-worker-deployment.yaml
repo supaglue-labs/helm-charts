@@ -73,7 +73,7 @@ spec:
             - name: DISABLE_BANNER
               value: "1"
             - name: SUPAGLUE_LOG_LEVEL
-              value: {{ .Values.api.logLevel }}
+              value: {{ .Values.syncWorker.logLevel }}
             - name: SUPAGLUE_TEMPORAL_HOST
               value: {{ template "supaglue.temporalHost" . }}
             - name: SUPAGLUE_TEMPORAL_PORT
