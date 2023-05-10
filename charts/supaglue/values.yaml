@@ -35,7 +35,7 @@ syncWorker:
 
 salesforcePubSub:
   enabled: true
-  replicaCount: 2
+  replicaCount: 1
   logLevel: "info"
   image:
     repository: ~
