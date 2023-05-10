@@ -33,6 +33,25 @@ syncWorker:
   tolerations: []
   affinity: {}
 
+salesforcePubSub:
+  enabled: true
+  replicaCount: 2
+  logLevel: "info"
+  image:
+    repository: ~
+    tag: ~
+    pullPolicy: ~
+  metrics:
+    annotations:
+      enabled: false
+  env: []
+  podAnnotations: {}
+  podLabels: {}
+  resources: {}
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
+
 management:
   enabled: true
   replicaCount: 1
@@ -128,12 +147,15 @@ secretKeys:
   adminPassword: admin-password
   apiDatabaseUrl: api-database-url
   syncWorkerDatabaseUrl: sync-worker-database-url
+  salesforcePubSubDatabaseUrl: salesforce-pubsub-database-url
+  svixApiToken: svix-api-token
 
 apiKeySalt: ""
 dbEncryptionSecret: ""
 jwtSecret: ""
 internalApiToken: ""
 adminPassword: ""
+svixApiToken: ""
 
 deploymentId: ""
 

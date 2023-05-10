@@ -73,7 +73,7 @@ spec:
             - name: DISABLE_BANNER
               value: "1"
             - name: SUPAGLUE_LOG_LEVEL
-              value: {{ .Values.api.logLevel }}
+              value: {{ .Values.syncWorker.logLevel }}
             - name: SUPAGLUE_TEMPORAL_HOST
               value: {{ template "supaglue.temporalHost" . }}
             - name: SUPAGLUE_TEMPORAL_PORT
@@ -88,6 +88,11 @@ spec:
                 secretKeyRef:
                   name: {{ template "supaglue.secretName" }}
                   key: {{ default "sync-worker-database-url" .Values.secretKeys.syncWorkerDatabaseUrl }}
+            - name: SVIX_API_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "supaglue.secretName" . }}
+                  key: {{ default "svix-api-token" .Values.secretKeys.svixApiToken }}
             - name: SUPAGLUE_DEPLOYMENT_ID
               value: {{ include "supaglue.deploymentId" . }}
             {{- with .Values.syncWorker.env }}
