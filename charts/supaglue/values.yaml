@@ -148,12 +148,14 @@ secretKeys:
   apiDatabaseUrl: api-database-url
   syncWorkerDatabaseUrl: sync-worker-database-url
   salesforcePubSubDatabaseUrl: salesforce-pubsub-database-url
+  svixApiToken: svix-api-token
 
 apiKeySalt: ""
 dbEncryptionSecret: ""
 jwtSecret: ""
 internalApiToken: ""
 adminPassword: ""
+svixApiToken: ""
 
 deploymentId: ""
 

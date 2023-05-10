@@ -88,6 +88,11 @@ spec:
                 secretKeyRef:
                   name: {{ template "supaglue.secretName" }}
                   key: {{ default "sync-worker-database-url" .Values.secretKeys.syncWorkerDatabaseUrl }}
+            - name: SVIX_API_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "supaglue.secretName" . }}
+                  key: {{ default "svix-api-token" .Values.secretKeys.svixApiToken }}
             - name: SUPAGLUE_DEPLOYMENT_ID
               value: {{ include "supaglue.deploymentId" . }}
             {{- with .Values.syncWorker.env }}

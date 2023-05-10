@@ -64,6 +64,11 @@ spec:
                 secretKeyRef:
                   name: {{ template "supaglue.secretName" }}
                   key: {{ default "salesforce-pub-sub-database-url" .Values.secretKeys.salesforcePubSubDatabaseUrl }}
+            - name: SVIX_API_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "supaglue.secretName" . }}
+                  key: {{ default "svix-api-token" .Values.secretKeys.svixApiToken }}
             - name: SUPAGLUE_DEPLOYMENT_ID
               value: {{ include "supaglue.deploymentId" . }}
             {{- with .Values.salesforcePubSub.env }}
