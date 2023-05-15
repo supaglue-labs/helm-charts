@@ -59,6 +59,11 @@ spec:
             {{- end }}
             - name: SUPAGLUE_LOG_LEVEL
               value: {{ .Values.salesforcePubSub.logLevel }}
+            - name: SUPAGLUE_API_ENCRYPTION_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "supaglue.secretName" . }}
+                  key: {{ .Values.secretKeys.dbEncryptionSecret }}
             - name: SUPAGLUE_DATABASE_URL
               valueFrom:
                 secretKeyRef:
